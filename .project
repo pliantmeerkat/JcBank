@@ -24,4 +24,10 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>testinglib</name>
+			<value>file:/Users/jackbranch/eclipse-workspace/C++Kata/src/testinglib</value>
+		</variable>
+	</variableList>
 </projectDescription>
