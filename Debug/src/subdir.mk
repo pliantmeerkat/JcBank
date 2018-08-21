@@ -4,15 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/Unit1.cpp \
+../src/BankAccount.cpp \
 ../src/main.cpp 
 
 OBJS += \
-./src/Unit1.o \
+./src/BankAccount.o \
 ./src/main.o 
 
 CPP_DEPS += \
-./src/Unit1.d \
+./src/BankAccount.d \
 ./src/main.d 
 
 
