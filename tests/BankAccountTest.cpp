@@ -5,7 +5,8 @@
  *      Author: jackbranch
  */
 
-#include "BankAccountTest.h"
+#include "bankAccount.h"
+#include "gtest/gtest.h"
 
 namespace {
 
@@ -15,7 +16,7 @@ namespace {
 		BankAccount * account;
 		BankAccountTest()
 		{
-
+			// seed input?
 		}
 		virtual ~BankAccountTest() override
 		{
@@ -43,9 +44,29 @@ namespace {
 		ASSERT_EQ(account->holderName, "test client");
 	}
 
-	// other methods
+	TEST_F(BankAccountTest, accountId)
+	{
+		ASSERT_EQ(account->accountId, 111111);
+	}
 
-	TEST_F(BankAccountTest, DepositIncreasesBalance)
+	TEST_F(BankAccountTest, transactionHistory)
+	{
+		//ASSERT_EQ(account->transactionHistory, []);
+	}
+
+	// other methods - with good input
+
+	TEST_F(BankAccountTest, makeDeposit)
+	{
+
+	}
+
+	TEST_F(BankAccountTest, makeWithdrawl)
+	{
+
+	}
+
+	TEST_F(BankAccountTest, makePayment)
 	{
 
 	}

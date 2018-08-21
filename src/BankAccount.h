@@ -8,13 +8,15 @@
 #ifndef BANKACCOUNT_H_
 #define BANKACCOUNT_H_
 
-#include <string>
+#include "stadfx.h"
 
 class BankAccount
 {
 public:
 	BankAccount(std::string holderName);
 	int balance;
+	int accountId;
+	// transaction history
 	std::string holderName;
 };
 

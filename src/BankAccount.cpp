@@ -5,12 +5,13 @@
  *      Author: jackbranch
  */
 
-#include "BankAccount.h"
+#include <bankAccount.h>
 
 BankAccount::BankAccount(std::string holderName)
 {
-	this->balance = 0;
+	this->balance = 0; // will later point to db
 	this->holderName = holderName;
+	this->accountId = 111111; // will later use a database for this
 }
 
 

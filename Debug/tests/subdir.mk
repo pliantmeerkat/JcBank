@@ -4,13 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../tests/BankAccountTest.cpp 
+../tests/bankAccountTest.cpp \
+../tests/paymentProcessorTest.cpp \
+../tests/transactionTest.cpp 
 
 OBJS += \
-./tests/BankAccountTest.o 
+./tests/bankAccountTest.o \
+./tests/paymentProcessorTest.o \
+./tests/transactionTest.o 
 
 CPP_DEPS += \
-./tests/BankAccountTest.d 
+./tests/bankAccountTest.d \
+./tests/paymentProcessorTest.d \
+./tests/transactionTest.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
