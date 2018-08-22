@@ -11,7 +11,7 @@
 #include "stadfx.h"
 
 
-template <typename Transaction>
+template <typename Transaction, class Authentication>
 
 class PaymentProcessor
 {
@@ -40,6 +40,7 @@ public:
 
 private:
 	Transaction transaction;
+	Authentication authentication;
 };
 
 

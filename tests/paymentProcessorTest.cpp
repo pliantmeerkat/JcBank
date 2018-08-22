@@ -41,7 +41,7 @@ class MockAuthentication
 struct PaymentProcessorTest: public ::testing::Test
 	{
 	protected:
-		PaymentProcessor<Transaction> * paymentTester;
+		PaymentProcessor<Transaction, MockAuthentication> * paymentTester;
 		Transaction * testTransaction;
 		PaymentProcessorTest()
 		{
