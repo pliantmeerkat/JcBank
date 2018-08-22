@@ -14,27 +14,23 @@ namespace {
 
 class MockAuthentication
 {
-	public:
-	bool desiredResult = false; // defaults to true for failing tests
-	void setDesiredResult(bool result)
+public:
+
+	static bool validPayeeId(int payeeId)
 	{
-		desiredResult = result;
+		return true;
 	}
-	bool validPayeeId(int * payeeId)
+	static bool validPayerId(int payerId)
 	{
-		return desiredResult;
+		return true;
 	}
-	bool validPayerId(int * payerId)
+	static bool validAmount(int paymentAmount)
 	{
-		return desiredResult;
+		return true;
 	}
-	bool validAmount(int * paymentAmount)
+	static bool payerHasFunds(int payerId, int paymentAmount)
 	{
-		return desiredResult;
-	}
-	bool payerHasFunds(int * payerId, int * paymentAmount)
-	{
-		return desiredResult;
+		return true;
 	}
 };
 
@@ -54,6 +50,7 @@ struct PaymentProcessorTest: public ::testing::Test
 		virtual void SetUp() override
 		{
 			testTransaction = paymentTester->createTransaction(1, 2, 3, "11/11/11 22:00", 150.00, "Test Transaction");
+			//paymentTester->authentication.setPayeeValid = true;
 			//paymentTester = new PaymentProcessor<Transaction>();
 		}
 		virtual void TearDown() override
@@ -92,6 +89,7 @@ struct PaymentProcessorTest: public ::testing::Test
 	TEST_F(PaymentProcessorTest, verifyBadPayeeId)
 	{
 		try {
+			//paymentTester->authentication.
 			paymentTester->verifyTransaction(testTransaction);
 			FAIL() << "Should Throw Error with invalid Payee";
 		} catch(std::exception &e) {

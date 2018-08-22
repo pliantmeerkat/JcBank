@@ -35,13 +35,18 @@ public:
 	static void verifyTransaction(Transaction * transaction)
 	{
 		// will be private later as called by payment proc
-
+		if(!authentication.validPayeeId(transaction->payeeId))
+		{
+			throw new std::exception();
+		}
 	}
 
-private:
+//private:
 	Transaction transaction;
-	Authentication authentication;
+	static Authentication authentication;
 };
 
 
 #endif /* PAYMENTPROCESSOR_H_ */
+
+
