@@ -6,19 +6,16 @@
 CPP_SRCS += \
 ../src/bankAccount.cpp \
 ../src/main.cpp \
-../src/paymentProcessor.cpp \
 ../src/transaction.cpp 
 
 OBJS += \
 ./src/bankAccount.o \
 ./src/main.o \
-./src/paymentProcessor.o \
 ./src/transaction.o 
 
 CPP_DEPS += \
 ./src/bankAccount.d \
 ./src/main.d \
-./src/paymentProcessor.d \
 ./src/transaction.d 
 
 

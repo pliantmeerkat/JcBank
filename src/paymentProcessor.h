@@ -10,12 +10,36 @@
 
 #include "stadfx.h"
 
+
+template <typename Transaction>
+
 class PaymentProcessor
 {
+
 public:
-	PaymentProcessor();
-	void createTransaction();
-	void verifyTransaction();
+
+	static Transaction * createTransaction(int paymentId, int payeeId, int payerId,
+								  std::string date, float amount, std::string notes)
+	{
+		Transaction * transaction = new Transaction(paymentId, payeeId, payerId, date, amount, notes);
+
+		try {
+			verifyTransaction(transaction);
+		} catch(std::exception &e){
+			throw e;
+		}
+
+		return transaction;
+	}
+//todo crreate private
+	static void verifyTransaction(Transaction * transaction)
+	{
+		// will be private later as called by payment proc
+
+	}
+
+private:
+	Transaction transaction;
 };
 
 
