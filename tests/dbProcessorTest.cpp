@@ -8,12 +8,13 @@
 
 #include "gtest/gtest.h"
 #include "bankAccount.h"
-#include "db/dbProcessor.h"
+#include "../db/dbProcessor.h"
 
 namespace dbProcessorTesting
 {
 	struct DbProcessorTest
 	{
+	protected:
 
 	};
 }

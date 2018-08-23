@@ -25,6 +25,5 @@ CPP_DEPS :=
 SUBDIRS := \
 external/gtest \
 src \
-src/db \
 tests \
 
