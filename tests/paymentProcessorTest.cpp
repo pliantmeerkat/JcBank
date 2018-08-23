@@ -12,27 +12,37 @@
 
 namespace {
 
+// class mocks
+
 class MockAuthentication
 {
 public:
 
+	// enter zero values for mock fails
+
 	static bool validPayeeId(int payeeId)
 	{
+		if(payeeId == 0) { return false; }
 		return true;
 	}
 	static bool validPayerId(int payerId)
 	{
+		if(payerId == 0) { return false; }
 		return true;
 	}
-	static bool validAmount(int paymentAmount)
+	static bool validAmount(float paymentAmount)
 	{
+		if(paymentAmount == 0.00) { return false; }
 		return true;
 	}
 	static bool payerHasFunds(int payerId, int paymentAmount)
 	{
+		if(payerId == 42) { return false; }
 		return true;
 	}
 };
+
+// test class
 
 struct PaymentProcessorTest: public ::testing::Test
 	{
@@ -50,8 +60,6 @@ struct PaymentProcessorTest: public ::testing::Test
 		virtual void SetUp() override
 		{
 			testTransaction = paymentTester->createTransaction(1, 2, 3, "11/11/11 22:00", 150.00, "Test Transaction");
-			//paymentTester->authentication.setPayeeValid = true;
-			//paymentTester = new PaymentProcessor<Transaction>();
 		}
 		virtual void TearDown() override
 		{
@@ -72,6 +80,13 @@ struct PaymentProcessorTest: public ::testing::Test
 		ASSERT_EQ(testTransaction->paymentNotes, "Test Transaction");
 	}
 
+	std::string errorToString(std::invalid_argument * e)
+	{
+		std::stringstream ss;
+		ss << e->what();
+		return ss.str();
+	}
+
 	// verification tests
 	TEST_F(PaymentProcessorTest, verifyTransactionMockPass)
 	{
@@ -86,14 +101,19 @@ struct PaymentProcessorTest: public ::testing::Test
 
 	// faliure tets
 
+	// authentication/ verify transaction fails
+
 	TEST_F(PaymentProcessorTest, verifyBadPayeeId)
 	{
 		try {
-			//paymentTester->authentication.
+			testTransaction = paymentTester->createTransaction(1, 0, 3, "11/11/11 22:00", 150.00, "Test Transaction");
 			paymentTester->verifyTransaction(testTransaction);
 			FAIL() << "Should Throw Error with invalid Payee";
-		} catch(std::exception &e) {
-			ASSERT_EQ(std::string(e.what()), "Invalid Payee");
+		} catch(std::invalid_argument * e) {
+
+
+			ASSERT_EQ(errorToString(e), "Bad Payee Id");
+
 		}
 
 	}
@@ -101,37 +121,46 @@ struct PaymentProcessorTest: public ::testing::Test
 	TEST_F(PaymentProcessorTest, verifyBadPayerId)
 	{
 		try {
+			testTransaction = paymentTester->createTransaction(1, 1, 0, "11/11/11 22:00", 150.00, "Test Transaction");
 			paymentTester->verifyTransaction(testTransaction);
 			FAIL() << "Should Throw Error with invalid Payer";
-		} catch(std::exception &e) {
-			ASSERT_EQ(std::string(e.what()), "Invalid Payer");
+		} catch(std::invalid_argument * e) {
+			ASSERT_EQ(errorToString(e), "Bad Payer Id");
 		}
 	}
 
 	TEST_F(PaymentProcessorTest, verifyBadPaymentAmount)
 	{
 		try {
+			testTransaction = paymentTester->createTransaction(1, 1, 3, "11/11/11 22:00", 0.00, "Test Transaction");
 			paymentTester->verifyTransaction(testTransaction);
 			FAIL() << "Should Throw Error with invalid Amount";
-		} catch(std::exception &e) {
-			ASSERT_EQ(std::string(e.what()), "Invalid Amount");
+		} catch(std::invalid_argument * e) {
+			ASSERT_EQ(errorToString(e), "Invalid Amount");
 		}
 	}
 
 	TEST_F(PaymentProcessorTest, verifyTooPoorPayer)
 	{
 		try {
+			testTransaction = paymentTester->createTransaction(1, 2, 42, "11/11/11 22:00", 150.00, "Test Transaction");
 			paymentTester->verifyTransaction(testTransaction);
 			FAIL() << "Should Throw Error with invalid Funds";
-		} catch(std::exception &e) {
-			ASSERT_EQ(std::string(e.what()), "Insufficient Funds");
+		} catch(std::invalid_argument * e) {
+			ASSERT_EQ(errorToString(e), "Insufficient Funds");
 		}
 	}
 
+	// create transaction fails
 
 	TEST_F(PaymentProcessorTest, failedCreateTransaction)
 	{
-
+		try {
+			testTransaction = paymentTester->createTransaction(1, 0, 3, "11/11/11 22:00", 150.00, "Test Transaction");
+			FAIL() << "should throw error with invalid args";
+		} catch(std::invalid_argument * e) {
+			ASSERT_EQ(errorToString(e), "Bad Payee Id");
+		}
 	}
 
 }

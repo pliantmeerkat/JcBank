@@ -25,7 +25,7 @@ public:
 
 		try {
 			verifyTransaction(transaction);
-		} catch(std::exception &e){
+		} catch(std::invalid_argument &e){
 			throw e;
 		}
 
@@ -37,7 +37,19 @@ public:
 		// will be private later as called by payment proc
 		if(!authentication.validPayeeId(transaction->payeeId))
 		{
-			throw new std::exception();
+			throw new std::invalid_argument("Bad Payee Id");
+		}
+		else if(!authentication.validPayerId(transaction->payerId))
+		{
+			throw new std::invalid_argument("Bad Payer Id");
+		}
+		else if(!authentication.validAmount(transaction->paymentAmount))
+		{
+			throw new std::invalid_argument("Invalid Amount");
+		}
+		else if(!authentication.payerHasFunds(transaction->payerId, transaction->paymentAmount))
+		{
+			throw new std::invalid_argument("Insufficient Funds");
 		}
 	}
 
