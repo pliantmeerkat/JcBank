@@ -7,6 +7,7 @@ CPP_SRCS += \
 ../tests/authenticationTest.cpp \
 ../tests/bankAccountTest.cpp \
 ../tests/dbProcessorTest.cpp \
+../tests/encryptionTest.cpp \
 ../tests/paymentProcessorTest.cpp \
 ../tests/transactionTest.cpp 
 
@@ -14,6 +15,7 @@ OBJS += \
 ./tests/authenticationTest.o \
 ./tests/bankAccountTest.o \
 ./tests/dbProcessorTest.o \
+./tests/encryptionTest.o \
 ./tests/paymentProcessorTest.o \
 ./tests/transactionTest.o 
 
@@ -21,6 +23,7 @@ CPP_DEPS += \
 ./tests/authenticationTest.d \
 ./tests/bankAccountTest.d \
 ./tests/dbProcessorTest.d \
+./tests/encryptionTest.d \
 ./tests/paymentProcessorTest.d \
 ./tests/transactionTest.d 
 
