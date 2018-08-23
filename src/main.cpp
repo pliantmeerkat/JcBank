@@ -8,6 +8,7 @@
 #include "gtest/gtest.h"
 #include "stadfx.h"
 
+
 int main(int ac, char* argv[])
 {
 	::testing::InitGoogleTest(&ac, argv);

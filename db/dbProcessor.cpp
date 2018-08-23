@@ -5,6 +5,21 @@
  *      Author: jackbranch
  */
 
+#include "dbProcessor.h"
+#include "stadfx.h"
 
 
 
+
+/*
+BankAccount DbProcessor::getAccount(int accountId)
+{
+
+}
+
+Transaction DbProcessor::getTransaction(int transactionId)
+{
+
+}
+
+*/

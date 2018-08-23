@@ -5,9 +5,9 @@
  *      Author: jackbranch
  */
 
-#include <bankAccount.h>
+#include "bankAccount.h"
 
-BankAccount::BankAccount(std::string holderName, int balance)
+BankAccount::BankAccount(std::string holderName, float balance)
 {
 	this->balance = balance; // will later point to db
 	this->holderName = holderName;

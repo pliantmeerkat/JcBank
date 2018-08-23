@@ -13,8 +13,8 @@
 class BankAccount
 {
 public:
-	BankAccount(std::string holderName, int balance);
-	int balance;
+	BankAccount(std::string holderName, float balance);
+	float balance;
 	int accountId;
 	// transaction history
 	std::string holderName;

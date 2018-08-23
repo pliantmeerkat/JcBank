@@ -11,6 +11,7 @@ RM := rm -rf
 -include tests/subdir.mk
 -include src/subdir.mk
 -include external/gtest/subdir.mk
+-include db/subdir.mk
 -include subdir.mk
 -include objects.mk
 

@@ -9,13 +9,19 @@
 #define TESTHELPER_H_
 
 #include <string>
+#include "bankAccount.h"
+#include <sqlite3.h>
 
 std::string errorToString(std::invalid_argument * e)
-	{
-		std::stringstream ss;
-		ss << e->what();
-		return ss.str();
-	}
+{
+	std::stringstream ss;
+	ss << e->what();
+	return ss.str();
+}
 
+void addTestDataToDb()
+{
+
+}
 
 #endif /* TESTHELPER_H_ */

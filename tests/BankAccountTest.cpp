@@ -8,7 +8,7 @@
 #include "bankAccount.h"
 #include "gtest/gtest.h"
 
-namespace BankAccountTeting
+namespace BankAccountTesting
 {
 
 	struct BankAccountTest: public ::testing::Test
