@@ -16,10 +16,13 @@ class Encryption
 public:
 	// varaibles
 	static const int MAXIMUM_INT_SIZE = 1000000; // maximum size of keys etc
-	static const int MINIMUM_INT_SIZE = 10000; // minimum size for keys etc
-	const int rKey;
+	static const int MINIMUM_INT_SIZE = 1000; // minimum size for keys etc
+	static int rKey;
+	static int pKey;
+	static int qKey;
 
 	static bool isNumberPrime(int number);
+	static bool isRelativePrime(unsigned int num, unsigned int numCompare);
 
 	//key generation
 	static int generatePrimeInt();

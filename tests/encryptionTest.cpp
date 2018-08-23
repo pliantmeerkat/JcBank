@@ -21,6 +21,18 @@ namespace EncryptionTesting
 		}
 	};
 
+	TEST_F(EncryptionTest, isNumberPrime)
+	{
+		ASSERT_TRUE(encrypt->isNumberPrime(7));
+		ASSERT_FALSE(encrypt->isNumberPrime(10));
+	}
+
+	TEST_F(EncryptionTest, isRelativePrime)
+	{
+		ASSERT_TRUE(encrypt->isRelativePrime(12, 13));
+		ASSERT_FALSE(encrypt->isRelativePrime(12, 20));
+	}
+
 	TEST_F(EncryptionTest, generatePrimeInt)
 	{
 		int randInt =encrypt->generatePrimeInt();
@@ -30,7 +42,10 @@ namespace EncryptionTesting
 	TEST_F(EncryptionTest, generateEncryptionKeys)
 	{
 		encrypt->generateEncryptionKeys();
-		int rKey = encrypt->rKey;
+		ASSERT_FALSE(encrypt->isNumberPrime(encrypt->rKey));
+		ASSERT_TRUE(encrypt->isRelativePrime(encrypt->pKey, encrypt->rKey));
+		ASSERT_TRUE(encrypt->isRelativePrime(encrypt->qKey, encrypt->rKey));
+		ASSERT_TRUE(encrypt->isRelativePrime(encrypt->pKey, encrypt->qKey));
 	}
 
 	TEST_F(EncryptionTest, encryptData)
