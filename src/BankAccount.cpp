@@ -7,11 +7,13 @@
 
 #include <bankAccount.h>
 
-BankAccount::BankAccount(std::string holderName)
+BankAccount::BankAccount(std::string holderName, int balance)
 {
-	this->balance = 0; // will later point to db
+	this->balance = balance; // will later point to db
 	this->holderName = holderName;
 	this->accountId = 111111; // will later use a database for this
+	// account transactions etc..
+	// creation date?
 }
 
 

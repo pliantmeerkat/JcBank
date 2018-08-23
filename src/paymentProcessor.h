@@ -11,7 +11,7 @@
 #include "stadfx.h"
 
 
-template <typename Transaction, class Authentication>
+template <typename Transaction, class DatabaseProcessor, class Authentication>
 
 class PaymentProcessor
 {
@@ -35,11 +35,11 @@ public:
 	static void verifyTransaction(Transaction * transaction)
 	{
 		// will be private later as called by payment proc
-		if(!authentication.validPayeeId(transaction->payeeId))
+		if(!authentication.validAccount(transaction->payeeId))
 		{
 			throw new std::invalid_argument("Bad Payee Id");
 		}
-		else if(!authentication.validPayerId(transaction->payerId))
+		else if(!authentication.validAccount(transaction->payerId))
 		{
 			throw new std::invalid_argument("Bad Payer Id");
 		}

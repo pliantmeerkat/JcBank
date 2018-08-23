@@ -8,7 +8,8 @@
 #include "bankAccount.h"
 #include "gtest/gtest.h"
 
-namespace {
+namespace BankAccountTeting
+{
 
 	struct BankAccountTest: public ::testing::Test
 	{
@@ -24,7 +25,7 @@ namespace {
 		}
 		virtual void SetUp() override
 		{
-			account = new BankAccount("test client");
+			account = new BankAccount("test client", 100.00);
 		}
 		virtual void TearDown() override
 		{
@@ -36,7 +37,7 @@ namespace {
 
 	TEST_F(BankAccountTest, accountBalanceStartsAtZero)
 	{
-		ASSERT_EQ(account->balance, 0);
+		ASSERT_EQ(account->balance, 100);
 	}
 
 	TEST_F(BankAccountTest, accountHolderIstestClient)

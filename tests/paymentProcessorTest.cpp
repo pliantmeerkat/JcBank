@@ -6,6 +6,7 @@
  */
 
 #include "gtest/gtest.h"
+#include "testHelper.h"
 #include "paymentProcessor.h"
 #include "transaction.h"
 
@@ -20,14 +21,9 @@ public:
 
 	// enter zero values for mock fails
 
-	static bool validPayeeId(int payeeId)
+	static bool validAccount(int accountId)
 	{
-		if(payeeId == 0) { return false; }
-		return true;
-	}
-	static bool validPayerId(int payerId)
-	{
-		if(payerId == 0) { return false; }
+		if(accountId == 0) { return false; }
 		return true;
 	}
 	static bool validAmount(float paymentAmount)
@@ -35,11 +31,16 @@ public:
 		if(paymentAmount == 0.00) { return false; }
 		return true;
 	}
-	static bool payerHasFunds(int payerId, int paymentAmount)
+	static bool payerHasFunds(int accountId, int paymentAmount)
 	{
-		if(payerId == 42) { return false; }
+		if(accountId == 42) { return false; }
 		return true;
 	}
+};
+
+class MockDatabase
+{
+
 };
 
 // test class
@@ -47,7 +48,7 @@ public:
 struct PaymentProcessorTest: public ::testing::Test
 	{
 	protected:
-		PaymentProcessor<Transaction, MockAuthentication> * paymentTester;
+		PaymentProcessor<Transaction,  MockDatabase, MockAuthentication> * paymentTester;
 		Transaction * testTransaction;
 		PaymentProcessorTest()
 		{
@@ -80,20 +81,13 @@ struct PaymentProcessorTest: public ::testing::Test
 		ASSERT_EQ(testTransaction->paymentNotes, "Test Transaction");
 	}
 
-	std::string errorToString(std::invalid_argument * e)
-	{
-		std::stringstream ss;
-		ss << e->what();
-		return ss.str();
-	}
-
 	// verification tests
 	TEST_F(PaymentProcessorTest, verifyTransactionMockPass)
 	{
 		try {
 			paymentTester->verifyTransaction(testTransaction);
 
-		} catch(std::exception &e) {
+		} catch(std::invalid_argument &e) {
 			FAIL() << "Should not throw exception";
 		}
 		paymentTester->verifyTransaction(testTransaction);

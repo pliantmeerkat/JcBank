@@ -4,29 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../tests/authenticationTest.cpp \
-../tests/bankAccountTest.cpp \
-../tests/dbProcessorTest.cpp \
-../tests/paymentProcessorTest.cpp \
-../tests/transactionTest.cpp 
+../src/db/dbProcessor.cpp 
 
 OBJS += \
-./tests/authenticationTest.o \
-./tests/bankAccountTest.o \
-./tests/dbProcessorTest.o \
-./tests/paymentProcessorTest.o \
-./tests/transactionTest.o 
+./src/db/dbProcessor.o 
 
 CPP_DEPS += \
-./tests/authenticationTest.d \
-./tests/bankAccountTest.d \
-./tests/dbProcessorTest.d \
-./tests/paymentProcessorTest.d \
-./tests/transactionTest.d 
+./src/db/dbProcessor.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-tests/%.o: ../tests/%.cpp
+src/db/%.o: ../src/db/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
 	g++ -I"/Users/jackbranch/eclipse-workspace/C++Kata/external" -I"/Users/jackbranch/eclipse-workspace/C++Kata/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
