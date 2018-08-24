@@ -6,6 +6,7 @@
  */
 
 #include "encryption.h"
+#include <math.h>
 #include <iostream>
 
 int Encryption::rKey = 0;
@@ -54,38 +55,78 @@ int Encryption::generatePrimeInt()
 
 }
 
-void Encryption::generateEncryptionKeys()
+void Encryption::generatePKey(int totient)
 {
-	int u = Encryption::generatePrimeInt();
-	int v = Encryption::generatePrimeInt();
-	int phiR = (u-1) *(v-1);
-
-	// generate p key
-	for(int i = 0; i < rKey; i ++)
+	// key must be > 1 and coprime to totient
+	for(int i = 10; i < rKey; i ++)
 	{
-		if(Encryption::isRelativePrime(i, rKey))
+		if(Encryption::isRelativePrime(i, totient))
 		{
 			pKey = i;
 			break;
 		}
-		if(pKey == 0 || pKey == rKey)
+	}
+}
+
+void Encryption::generateQKey(int totient)
+{
+	// qK * pK = 1 + k(totient)
+	qKey = 0;
+	int k = 1;
+	qKey = (1 + (k *totient)) / pKey;
+
+}
+
+void Encryption::generateEncryptionKeys()
+{
+	int u = Encryption::generatePrimeInt();
+	int v = Encryption::generatePrimeInt();
+	rKey = u * v;
+	int totient = (u-1)*(v-1);
+
+	Encryption::generatePKey(totient);
+	std::cout<<pKey<<std::endl;
+	Encryption::generateQKey(totient);
+	std::cout<<qKey<<std::endl;
+}
+
+int * Encryption::encryptData(std::string data)
+{
+
+	Encryption::generateEncryptionKeys();
+	int * encryptedData = new int[data.length()];
+	long n;
+	int count = 0;
+	// calculated by equation c = message^e % n
+	for(char &c : data)
+	{
+		n = int(c);
+		for(int i = 1; i < pKey; i ++)
 		{
-			throw new std::invalid_argument("pKey is 0 or Rkey");
+			n *= i;
+			n %= rKey;
 		}
+		encryptedData[0] =n;
+		count += 1;
+	}
+	//std::cout<<encryptedData<<std::endl;
+	return encryptedData;
+}
+
+std::string Encryption::decryptData(int * data, int key)
+{
+	std::string decryptData = "";
+	long n;
+	for(int c : data)
+	{
+		n = int(c);
+		for(int i = 1; i < qKey; i ++)
+		{
+			n *= qKey;
+			n %= rKey;
+		}
+		decryptData += char(n);
 	}
 
-	// generate r key formula pkey * qKey = i * rkey + 1
-
-	std::cout<<phiR<<std::endl;
-	rKey = u * v;
-}
-
-std::string Encryption::encryptData(std::string data)
-{
-	return data;
-}
-
-std::string Encryption::decryptData(std::string data)
-{
-
+	return decryptData;
 }

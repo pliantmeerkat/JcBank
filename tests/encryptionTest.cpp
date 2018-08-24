@@ -14,10 +14,12 @@ namespace EncryptionTesting
 	{
 	protected:
 		Encryption * encrypt;
+		std::string inputString;
+		int * encryptArray
 
 		virtual void SetUp()
 		{
-
+			inputString = "Now, let's switch hats, Imagine that we've just managed to pluck the message ZOBG";
 		}
 	};
 
@@ -50,12 +52,19 @@ namespace EncryptionTesting
 
 	TEST_F(EncryptionTest, encryptData)
 	{
-		ASSERT_NE(encrypt->encryptData("Hello World"), "Hello World");
+		encryptArray = new int[inputString.length()];
+		encryptArray = encrypt->encryptData(inputString);
+		ASSERT_NE(encryptArray[0], 78);
+		//ASSERT_NE(encrypt->encryptData("Now, let's switch hats, Imagine that we've just managed to pluck the message ZOBG"), "Now, let's switch hats, Imagine that we've just managed to pluck the message ZOBG");
+
 	}
 
 	TEST_F(EncryptionTest, decryptData)
 	{
-
+		encryptArray = new int[inputString.length()];
+		encryptArray = encrypt->encryptData(inputString);
+		int qKey = encrypt->qKey;
+		ASSERT_EQ(encrypt->decryptData(encryptArray, qKey));
 	}
 
 }

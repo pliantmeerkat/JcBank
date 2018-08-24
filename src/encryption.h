@@ -15,11 +15,11 @@ class Encryption
 {
 public:
 	// varaibles
-	static const int MAXIMUM_INT_SIZE = 1000000; // maximum size of keys etc
-	static const int MINIMUM_INT_SIZE = 1000; // minimum size for keys etc
-	static int rKey;
-	static int pKey;
-	static int qKey;
+	static const int MAXIMUM_INT_SIZE = 127; // maximum size of keys etc
+	static const int MINIMUM_INT_SIZE = 25; // minimum size for keys etc
+	static int rKey; // modulus
+	static int pKey; // public key
+	static int qKey; // private key
 
 	static bool isNumberPrime(int number);
 	static bool isRelativePrime(unsigned int num, unsigned int numCompare);
@@ -30,9 +30,12 @@ public:
 
 	// main methods
 
-	static std::string encryptData(std::string data);
-	static std::string decryptData(std::string encryptedData);
+	static int * encryptData(std::string data);
+	static std::string decryptData(int * encryptedData, int key);
 
+private:
+	static void generatePKey(int totient);
+	static void generateQKey(int totient);
 };
 
 
