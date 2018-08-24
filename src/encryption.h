@@ -10,13 +10,15 @@
 
 #include "stadfx.h"
 #include <random>
+#include "infint.h"
+
 
 class Encryption
 {
 public:
 	// varaibles
-	static const int MAXIMUM_INT_SIZE = 127; // maximum size of keys etc
-	static const int MINIMUM_INT_SIZE = 3; // minimum size for keys etc
+	static const int MAXIMUM_INT_SIZE = 40; // maximum size of keys etc
+	static const int MINIMUM_INT_SIZE = 30; // minimum size for keys etc
 	static int rKey; // modulus
 	static int pKey; // public key
 	static int qKey; // private key

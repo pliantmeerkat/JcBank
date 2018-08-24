@@ -9,9 +9,9 @@
 #include <math.h>
 #include <iostream>
 
-int Encryption::rKey = 0;
-int Encryption::pKey = 0;
-int Encryption::qKey = 0;
+int Encryption::rKey = 127; // must be 127 currently
+int Encryption::pKey = 11;
+int Encryption::qKey = 23;
 
 bool Encryption::isNumberPrime(int number)
 {
@@ -58,7 +58,7 @@ int Encryption::generatePrimeInt()
 void Encryption::generatePKey(int totient)
 {
 	// key must be > 1 and coprime to totient
-	for(int i = 10; i < rKey; i ++)
+	for(int i = 2; i < rKey; i ++)
 	{
 		if(Encryption::isRelativePrime(i, totient))
 		{
@@ -81,13 +81,13 @@ void Encryption::generateEncryptionKeys()
 {
 	int u = Encryption::generatePrimeInt();
 	int v = Encryption::generatePrimeInt();
-	rKey = u * v;
+	//rKey = u * v;
 	int totient = (u-1)*(v-1);
 
-	Encryption::generatePKey(totient);
-	std::cout<<pKey<<std::endl;
-	Encryption::generateQKey(totient);
-	std::cout<<qKey<<std::endl;
+	//Encryption::generatePKey(totient);
+	//std::cout<<pKey<<std::endl;
+	//Encryption::generateQKey(totient);
+	//std::cout<<qKey<<std::endl;
 }
 
 std::string Encryption::encryptData(std::string data)
@@ -102,7 +102,7 @@ std::string Encryption::encryptData(std::string data)
 		n = int(c);
 		for(int i = 1; i < pKey; i ++)
 		{
-			n *= i;
+			n *= int(c);
 			n %= rKey;
 		}
 		encryptedData += char(n);
@@ -120,11 +120,11 @@ std::string Encryption::decryptData(std::string data, int key)
 		n = int(c);
 		for(int i = 1; i < qKey; i ++)
 		{
-			n *= qKey;
+			n *= int(c);
 			n %= rKey;
 		}
-		decryptData += char(n);
+		decryptData += char(n);//Encryption::convertIntToChar(n);
 	}
-
+	std::cout<<decryptData<<std::endl;
 	return decryptData;
 }

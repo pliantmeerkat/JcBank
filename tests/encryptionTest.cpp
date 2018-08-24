@@ -18,7 +18,7 @@ namespace EncryptionTesting
 
 		virtual void SetUp()
 		{
-			inputString = "Now, let's switch hats, Imagine that we've just managed to pluck the message ZOBG";
+			inputString = "Hello WOrldwfhe da rihirevujsdnfuweuh";
 		}
 	};
 
@@ -36,7 +36,7 @@ namespace EncryptionTesting
 
 	TEST_F(EncryptionTest, generatePrimeInt)
 	{
-		int randInt =encrypt->generatePrimeInt();
+		int randInt = encrypt->generatePrimeInt();
 		ASSERT_TRUE(encrypt->isNumberPrime(randInt));
 	}
 
@@ -44,15 +44,11 @@ namespace EncryptionTesting
 	{
 		encrypt->generateEncryptionKeys();
 		ASSERT_FALSE(encrypt->isNumberPrime(encrypt->rKey));
-		ASSERT_TRUE(encrypt->isRelativePrime(encrypt->pKey, encrypt->rKey));
-		ASSERT_TRUE(encrypt->isRelativePrime(encrypt->qKey, encrypt->rKey));
-		ASSERT_TRUE(encrypt->isRelativePrime(encrypt->pKey, encrypt->qKey));
 	}
 
 	TEST_F(EncryptionTest, encryptData)
 	{
 		ASSERT_NE(encrypt->encryptData(inputString), inputString);
-
 	}
 
 	TEST_F(EncryptionTest, decryptData)
