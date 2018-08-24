@@ -16,7 +16,7 @@ class Encryption
 public:
 	// varaibles
 	static const int MAXIMUM_INT_SIZE = 127; // maximum size of keys etc
-	static const int MINIMUM_INT_SIZE = 25; // minimum size for keys etc
+	static const int MINIMUM_INT_SIZE = 3; // minimum size for keys etc
 	static int rKey; // modulus
 	static int pKey; // public key
 	static int qKey; // private key
@@ -30,8 +30,8 @@ public:
 
 	// main methods
 
-	static int * encryptData(std::string data);
-	static std::string decryptData(int * encryptedData, int key);
+	static std::string encryptData(std::string data);
+	static std::string decryptData(std::string encryptedData, int key);
 
 private:
 	static void generatePKey(int totient);

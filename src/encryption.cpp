@@ -72,7 +72,7 @@ void Encryption::generateQKey(int totient)
 {
 	// qK * pK = 1 + k(totient)
 	qKey = 0;
-	int k = 1;
+	int k = 2;
 	qKey = (1 + (k *totient)) / pKey;
 
 }
@@ -90,13 +90,12 @@ void Encryption::generateEncryptionKeys()
 	std::cout<<qKey<<std::endl;
 }
 
-int * Encryption::encryptData(std::string data)
+std::string Encryption::encryptData(std::string data)
 {
 
 	Encryption::generateEncryptionKeys();
-	int * encryptedData = new int[data.length()];
+	std::string encryptedData = "";
 	long n;
-	int count = 0;
 	// calculated by equation c = message^e % n
 	for(char &c : data)
 	{
@@ -106,18 +105,17 @@ int * Encryption::encryptData(std::string data)
 			n *= i;
 			n %= rKey;
 		}
-		encryptedData[0] =n;
-		count += 1;
+		encryptedData += char(n);
 	}
-	//std::cout<<encryptedData<<std::endl;
+	std::cout<<encryptedData<<std::endl;
 	return encryptedData;
 }
 
-std::string Encryption::decryptData(int * data, int key)
+std::string Encryption::decryptData(std::string data, int key)
 {
 	std::string decryptData = "";
 	long n;
-	for(int c : data)
+	for(char &c : data)
 	{
 		n = int(c);
 		for(int i = 1; i < qKey; i ++)
