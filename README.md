@@ -32,11 +32,11 @@ This program utilises the [Google Test](https://github.com/google/googletest) li
 
 Within this library i have attempted to create the following features:
 	
-	* Account simulation: Users can create an account, capable of storing the user's balance, processing 	transactions and recording any transactions that occur.
-	* Transaction simulation: All payments are represented by transactions objects, allowing for detailed recoring of all processed transactions and their relevent infomation
-	* Client authentication: simulation of account creation, amount validation and funds verifications during transactions.
-	* Database implementatation: all records are stored in a *postgres* database, allowing for easy data retrieval and storage.
-	* Data security: all stored data is encrypted using a simple implementation of the [RSA Algorithm](https://simple.wikipedia.org/wiki/RSA_algorithm).
+* Account simulation: Users can create an account, capable of storing the user's balance, processing 	transactions and recording any transactions that occur.
+* Transaction simulation: All payments are represented by transactions objects, allowing for detailed recoring of all processed transactions and their relevent infomation
+* Client authentication: simulation of account creation, amount validation and funds verifications during transactions.
+* Database implementatation: all records are stored in a *postgres* database, allowing for easy data retrieval and storage.
+* Data security: all stored data is encrypted using a simple implementation of the [RSA Algorithm](https://simple.wikipedia.org/wiki/RSA_algorithm).
 	
 ## Contributing 
 
